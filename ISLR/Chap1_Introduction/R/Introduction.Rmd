@@ -1,0 +1,27 @@
+---
+title: "ISLR Chapter 1"
+output: html_document
+---
+
+Start by loading the data
+```{r loaddata}
+library(ISLR)
+data(Wage)
+```
+
+Now show some preliminary plots
+```{r showdata, fig.width=8, fig.height=4}
+library(ggplot2)
+library(gridExtra)
+g1 <- ggplot(Wage) + geom_point(aes(age, wage)) + 
+    geom_smooth(aes(age, wage), se=FALSE, size=1.1) +
+    labs(x="Age", y="Wage")
+g2 <- ggplot(Wage) + geom_point(aes(year, wage)) +
+    geom_smooth(aes(year, wage), method=lm, se=FALSE) +
+    labs(x="Year", y="Wage")
+g3 <- ggplot(Wage) + geom_boxplot(aes(education, wage, fill=education)) +
+        labs(x="Education Level", y="Wage") +
+        theme(legend.position="none",
+            axis.text.x=element_text(angle=90, vjust=0.5, size=8))
+grid.arrange(g1, g2, g3, ncol=3)
+```
