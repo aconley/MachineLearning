@@ -38,7 +38,7 @@ predict(lm.fit, tst.data, interval="predict")
 ## Prob 9
 First look at all the variables:
 ```{r prob9scatter}
-pairs(Auto)
+pairs(Auto, cex=0.02)
 ```
 
 The correlations - excluding the name column
@@ -70,3 +70,68 @@ par(mfrow=c(1, 1))
 Only a few are interesting -- displacement and weight,
 horsepower and year.  The residuals are less non-linear
 now.
+
+## Problem 10
+
+```{r prob10}
+data(Carseats)
+lm.fit <- lm(Sales ~ Price + Urban + US, Carseats)
+summary(lm.fit)
+```
+
+Urban is apparently not important.
+
+```{r prob10nourban}
+lm.fit <- lm(Sales ~ Price + US, Carseats)
+confint(lm.fit)
+par(mfrow=c(2, 2))
+plot(lm.fit)
+par(mfrow=c(1,1))
+```
+
+## Problem 11
+
+Generate some test data
+```{r prob11data}
+set.seed(939834831)
+x = rnorm(100)
+y = 2 * x + rnorm(100)
+```
+
+Now do the regression of x onto y (with no intercept)
+and y onto x
+```{r prob11regress}
+lm.fity = lm(y ~ x + 0)
+lm.fitx = lm(x ~ y + 0)
+par(mfrow=c(1,2))
+plot(x, y, xlab="x", ylab="y")
+abline(lm.fity)
+plot(y, x, xlab="y", ylab="x")
+abline(lm.fitx)
+par(mfrow=c(1,1))
+```
+
+The coefficient for the first fit (`r format(lm.fity$coefficients)`) is close
+to the inverse of the second (`r format(1/lm.fitx$coefficients)`) - but not
+quite the same.
+
+## Problem 13
+
+```{r prob13generate}
+x = rnorm(100)
+eps = rnorm(100, sd=sqrt(0.25))
+y = -1 + 0.5 * x + eps
+lm.fit = lm(y ~ x)
+lm.fit_quad = lm(y ~ x + I(x^2))
+```
+
+Now show the various fits
+```{r prob13show}
+plot(x, y)
+abline(lm.fit, col='blue', lty=1)
+abline(-1, 0.5, col='red', lty=2)
+xx <- seq(-3, 3, length.out=100)
+lines(xx, predict(lm.fit_quad, data.frame(x=xx)), lty=3, col='green')
+txt <- c("Least Squares Linear", "Least Squares Quadratic", "Population")
+legend(0, -2, lty=c(1, 3, 2), txt, col=c("blue", "green", "red"))
+```
