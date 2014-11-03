@@ -1,0 +1,72 @@
+---
+title: 'Chapter 3: Linear Regression'
+output: html_document
+---
+
+Start by loading our data
+```{r loaddata}
+library(ISLR)
+data(Auto)
+```
+
+## Problem 8
+```{r prob8}
+lm.fit = lm(mpg ~ horsepower, data=Auto)
+summary(lm.fit)
+pred <- predict(lm.fit)
+par(mfrow=c(1, 2))
+plot(Auto$horsepower, Auto$mpg, pch=20, xlab="Horsepower", ylab="MPG")
+abline(lm.fit, lwd=3, col="blue")
+segments(Auto$horsepower, Auto$mpg, Auto$horsepower, pred, 
+         col="red", lwd=0.5)
+res <- residuals(lm.fit)
+pred <- predict(lm.fit)
+plot(Auto$horsepower, res, xlab="Horsepower", ylab="MPG residual")
+par(mfrow=c(1, 1))
+```
+
+There is strong evidence for a relation, but the residuals clearly
+show that the underlying relation is more complicated than linear.
+Ignoring that, the confidence and prediction intervals for 
+a 98hp car are:
+```{r prob8pred}
+tst.data = data.frame(horsepower=98)
+predict(lm.fit, tst.data, interval="confidence")
+predict(lm.fit, tst.data, interval="predict")
+```
+
+## Prob 9
+First look at all the variables:
+```{r prob9scatter}
+pairs(Auto)
+```
+
+The correlations - excluding the name column
+```{r prob9cor}
+library(dplyr)
+cor(select(Auto, -name))
+```
+
+Looking at a linear fit of all variables to predict mpg
+```{r prob9linfit}
+lm.fit = lm(mpg ~ . - name, Auto)
+summary(lm.fit)
+par(mfrow=c(2, 2))
+plot(lm.fit)
+par(mfrow=c(1, 1))
+```
+
+Now try some interaction terms
+```{r prob9interact}
+lm.fit = lm(mpg ~ . - name + cylinders:horsepower + 
+            cylinders:displacement + displacement:horsepower + 
+            weight:displacement + year:cylinders + year:horsepower, Auto)
+summary(lm.fit)
+par(mfrow=c(2, 2))
+plot(lm.fit)
+par(mfrow=c(1, 1))
+```
+
+Only a few are interesting -- displacement and weight,
+horsepower and year.  The residuals are less non-linear
+now.
