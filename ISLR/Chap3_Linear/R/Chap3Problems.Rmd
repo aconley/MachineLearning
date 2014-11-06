@@ -113,7 +113,14 @@ par(mfrow=c(1,1))
 
 The coefficient for the first fit (`r format(lm.fity$coefficients)`) is close
 to the inverse of the second (`r format(1/lm.fitx$coefficients)`) - but not
-quite the same.
+quite the same.  Without weights, the ratio between them should be
+the ratio of variances.
+```{r varratio}
+slope.ratio <- lm.fity$coefficients / lm.fitx$coefficients
+slope.ratio.pred <- var(y) / var(x)
+cat(paste("The measured ratio is",format(slope.ratio), "expected",
+          format(slope.ratio.pred)))
+```
 
 ## Problem 13
 
