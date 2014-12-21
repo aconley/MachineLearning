@@ -1,0 +1,41 @@
+\topglue 0.5in
+\centerline{Notes on Elements of Statistical Learning}
+\vskip 0.5in
+
+\noindent
+{\bf Section 4.2}
+In the discussion around equation (4.4), relating to linear classification,
+it is claimed that it must  be the case that  $\sum_{k \in {\cal G}} {\hat f}_k\left(x\right) = 1$
+as long as there is a column of ones in the {\bf X}.  This seems like
+nonsense, but a little experimentation shows it is true -- why?
+
+An important point is the the sum of each row in $\hat {\bf B}$ is zero
+except for the first one, which sums to one.  The fact that the sum of
+the $\hat f_k$ is unity follows from this immediately.  But why do 
+the sums work the way they do?
+
+Consider the formula for $\hat {\bf B}$:
+$
+\hat {\bf B} = \left({\bf X}^T {\bf X}\right)^{-1} {\bf X}^T {\bf Y}.
+$
+Next consider that each row of ${\bf Y}$ sums to one.
+Then, the row sum of ${\bf B}$ satisfies
+$\sum_j \hat{\bf B}_{ij} = \left({\bf X}^T {\bf X}\right)^{-1} {\bf X}^T {\bf 1}$.
+This is just the equation for doing a multi-linear fit to a constant vector
+of all 1s, where the obvious solution will have an intercept of 1 and
+zero for all other coefficients.
+
+\vskip 0.2in
+\noindent
+{\bf Section 4.5.1}
+The peceptron algorithm minimizes a quantity
+$$
+D\left(\beta, \beta_0\right) = - \sum_{i \in {\cal M}} y_i \left(x_i^T \beta + \beta_0\right)
+$$
+which is only proportional to the distance to the hyperplane.  However,
+the separating proportionality factor is $1 / ||\beta||$ (see eq.\ 4.40),
+so as written this doesn't quite work.  One possibility is that the algorithm
+requires $||\beta|| = 1$, since that defines the same separating plan; but
+the update steps don't require this, so there seems to be a problem here.
+
+\end
