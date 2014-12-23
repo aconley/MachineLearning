@@ -1,5 +1,5 @@
 \topglue 0.5in
-\centerline{Noted on BDA 3}
+\centerline{Notes on BDA 3}
 \vskip 0.5in
 
 \noindent
@@ -25,4 +25,17 @@ $$
  Pr\left(\theta = 1 | y_1, y_2, y_3\right) = {0.5 \times 0.2 \over 0.5 \times 0.2 + 0 \times 0.8} = 1
 $$
 
+\noindent {\bf Section 1.9}
+\nobreak
+In the example for the inverse cdf, the exponential function is used.
+That has $p \left(v\right) = \lambda \exp \left[ -\lambda v \right]$ for
+$v > 0$.  The cdf is
+$$
+ F\left(v\right) = \int_0^v \, dx \lambda \exp \left[ -\lambda x \right] =
+   \left[ \exp\left(-\lambda v\right) \right]_0^v = 1 - \exp\left(-\lambda v\right)
+$$
+and the inverse is
+$$
+  F^{-1}\left(v\right) = - \log \left(1 - v\right) / \lambda .
+$$
 \end
