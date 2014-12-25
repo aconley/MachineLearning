@@ -43,6 +43,7 @@ the update steps don't require this, so there seems to be a problem here.
 
 \vskip 0.4in
 \centerline{\bf Chapter 5}
+\vskip 0.2in
 \noindent
 {\bf Section 5.2} The mathermatical notation $_+$ isn't really explained, but
 is common.  It is defined as
@@ -51,4 +52,18 @@ $$
 $$
 Thus, something like $\left(x - \xi\right)_+$ is a unit slope line starting
 at $x = \xi$ and 0 below that.
+
+\vskip 0.2in
+{\bf Section 5.4.1}
+After eq.\ 5.15, it is stated that ${\bf H}_{\xi} {\bf H}_{\xi} = {\bf H}_{\xi}$.
+The definition is ${\bf H}_{\xi} = {\bf B}_{\xi} \left( {\bf B}_{\xi}^T
+ {\bf B}_{\xi}\right)^{-1} {\bf B}_{\xi}^T$.  So 
+ ${\bf H}_{\xi} {\bf H}_{\xi} = {\bf B}_{\xi} \left({\bf B}_{\xi}^T {\bf B}_{\xi}
+ \right)^{-1} {\bf B}_{\xi}^T {\bf B}_{\xi} \left({\bf B}_{\xi}^T {\bf B}_{\xi} 
+ \right)^{-1} {\bf B}_{\xi}^T =
+ {\bf B}_{\xi} \left({\bf B}_{\xi} {\bf B}_{\xi} \right)^{-1} \left({\bf B}_{\xi}^T
+ {\bf B}_{\xi}\right) \left({\bf B}_{\xi} {\bf B}_{\xi} \right)^{-1} {\bf B}_{\xi}^T =
+ {\bf H}_{\xi},$
+ as claimed.  Note that this is only non-trivial because ${\bf B}_{\xi}$
+ is not square -- if it were, then ${\bf H}_{\xi}$ would be the identity anyways.
 \end
