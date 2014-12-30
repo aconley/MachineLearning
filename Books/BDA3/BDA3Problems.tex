@@ -15,7 +15,80 @@ $$
  P \left( \theta = 1 | y \right) &= {P\left(y | \theta = 1\right) P\left(\theta = 1\right)
   \over P\left(y | \theta = 1\right) P\left(\theta = 1\right) +
   P\left(y | \theta = 2\right) P\left(\theta = 2\right)} \cr &=
-  { 1 \over \left(1 + \exp \left[ \left( 2 y \left(\mu_2 - \mu_1\right) + 
-   \mu_2^2 - \mu_1^2\right) / 2 \sigma^2 \right] \right) }}.
+  \left(1 + \exp \left[ \left( 2 y \left(\mu_2 - \mu_1\right) + 
+   \mu_2^2 - \mu_1^2\right) / 2 \sigma^2 \right] \right)^{-1} }.
+$$
+
+\noindent {\bf Problem 3}\hfil \break
+\noindent We have $P\left(xx\right) = p^2$, $P\left(xX\right) = 2 p \left(1-p\right)$
+(where we ignore ordering, so that Xx is counted as the same as xX),
+and so $P\left(XX\right) = 1 - p^2 - 2 p \left(1-p\right) = \left(1 - p\right)^2$.
+Now 
+$$
+P\left(xX | \rm{brown}\right) =  {1 \cdot P\left(xX\right) \over
+1 \cdot P\left(xX\right) + 1 \cdot P\left(XX\right) + 0 \cdot P\left(xx\right)} = 
+ {2 p \over 1 + p},
+$$
+and therefore $P\left(XX | \rm{brown}\right) = \left(1-p\right)/\left(1 + p\right)$.
+
+The complication here is normalization.  So what we want to compute is
+$$P\left(xX | p_1=\rm{brown}, p_2 = \rm{brown}\right) \over
+P\left(xX | p_1=\rm{brown}, p_2 = \rm{brown}\right) +
+P\left(XX | p_1=\rm{brown}, p_2 = \rm{brown}\right).$$
+Starting with the first term
+$$
+\eqalign{
+P\left(xX | p_1=\rm{brown}, p_2 = \rm{brown}\right)  &= P\left(xX | p_1=xX, p_2=xX\right)
+ P\left(xX\right)^2 \cr &+ 2 P\left(xX | p_1=xX, p_2=XX\right) P\left(xX\right) P\left(XX\right)
+ \cr &+ P\left(xX | p_1=xx, p_2=xx\right) P\left(xx\right)^2 \cr 
+  &= {1 \over 2} \left({2 p \over 1+p}\right)^2 + 2 {1 \over 2} {2 p \over 1 + p} {1 - p \over 1 + p} + 0
+  \left({1 - p \over 1 + p}\right)^2 \cr &= {2 p \over \left(1 + p\right)^2},
+}
+$$
+where things like $P\left(xX | p_1=xX, p_2 = XX\right) = 1/2$ come from inheritance
+squares.
+
+Similarly
+$$
+\eqalign{
+P\left(XX | p_1=\rm{brown}, p_2 = \rm{brown}\right)  &= P\left(XX | p_1=xX, p_2=xX\right)
+ P\left(xX\right)^2 \cr &+ 2 P\left(XX | p_1=xX, p_2=XX\right) P\left(xX\right) P\left(XX\right)
+ \cr &+ P\left(XX | p_1=xx, p_2=xx\right) P\left(xx\right)^2 \cr 
+  &= {1 \over 4} \left({2 p \over 1+p}\right)^2 + 2 {1 \over 2} {2 p \over 1 + p} {1 - p \over 1 + p} + 
+  1 \cdot \left({1 - p \over 1 + p}\right)^2 \cr &= {1 \over \left(1 + p\right)^2}.
+}
+$$
+Therefore, the steady state fraction is
+$${P\left(xX | p_1=\rm{brown}, p_2 = \rm{brown}\right) \over
+P\left(xX | p_1=\rm{brown}, p_2 = \rm{brown}\right) +
+P\left(XX | p_1=\rm{brown}, p_2 = \rm{brown}\right)} = {2 p \over 1 + 2 p}
+$$
+as claimed.
+
+If Judy has brown eyed kids with a xX, the outcome depends on Judy's genome:
+$$
+\eqalign{
+ P\left(\rm{child} = \rm{brown} | \rm{Judy}=xX\right) &= P\left(xX | J=xX\right)
+ + P\left(XX | J=xX\right) = 1/2 + 1/4 = 3/4 \cr
+ P\left(\rm{child} = \rm{brown} | \rm{Judy} = XX\right) &= 1}.
+ $$
+So, if Judy has $n$ brown eyed children, we have
+$$
+ P\left(J=xX | n\right) = {P\left(n | xX\right) P\left(xX\right) \over
+  P\left(n | xX\right) P\left(xX\right) + P\left(n | XX\right) P\left(XX\right)} =
+  {\left(3 \over 4\right)^n 2 p \over \left(3 / 4\right)^n 2 p + 1}
+$$
+
+\noindent {\bf Problem 6}\hfil \break
+\noindent 
+The proportion of births that are fraternal twins is 1/125, and 1/4 of those are
+both males.  The proportion of identical twins is 1/300, and 1/2 of those are both
+males.  Thus
+$$
+  P\left(i | \rm{both\,male}\right) = 
+  {P\left( \rm{both\,male} | i\right) P\left(i\right) \over
+   P\left( \rm{both\,male} | i\right) P\left(i\right) +
+   P\left( \rm{both\,male} | f\right) P\left(f\right)} = 
+    {1/4 \cdot 1/125 \over 1/4 \cdot 1/125 + 1 / 2 \cdot 1 / 300} = {6 \over 11}.
 $$
 \end
