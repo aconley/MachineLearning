@@ -1,12 +1,15 @@
+\font\big=cmbx10 scaled\magstep1
+\font\bigger=cmbx10 scaled\magstep3
+
 \topglue 0.5in
-\centerline{Problems from BDA 3}
+\centerline{\bigger Problems from BDA 3}
 \vskip 0.5in
 
 \noindent
-{\bf Chapter 1}
+{\bigger Chapter 1}
 \vskip 0.2in
 
-\noindent {\bf Problem 1} \hfil \break
+\noindent {\big Problem 1} \hfil \break
 \noindent a) $P\left(y\right) \sim 1/2 \left(N\left(\mu_1, \sigma^2\right) + 
 N \left(\mu_2, \sigma^2\right)\right)$ \hfil \break
 \noindent b) 
@@ -19,7 +22,7 @@ $$
    \mu_2^2 - \mu_1^2\right) / 2 \sigma^2 \right] \right)^{-1} }.
 $$
 
-\noindent {\bf Problem 3}\hfil \break
+\noindent {\big Problem 3}\hfil \break
 \noindent We have $P\left(xx\right) = p^2$, $P\left(xX\right) = 2 p \left(1-p\right)$
 (where we ignore ordering, so that Xx is counted as the same as xX),
 and so $P\left(XX\right) = 1 - p^2 - 2 p \left(1-p\right) = \left(1 - p\right)^2$.
@@ -79,7 +82,7 @@ $$
   {\left(3 \over 4\right)^n 2 p \over \left(3 / 4\right)^n 2 p + 1}
 $$
 
-\noindent {\bf Problem 6}\hfil \break
+\noindent {\big Problem 6}\hfil \break
 \noindent 
 The proportion of births that are fraternal twins is 1/125, and 1/4 of those are
 both males.  The proportion of identical twins is 1/300, and 1/2 of those are both
@@ -89,6 +92,56 @@ $$
   {P\left( \rm{both\,male} | i\right) P\left(i\right) \over
    P\left( \rm{both\,male} | i\right) P\left(i\right) +
    P\left( \rm{both\,male} | f\right) P\left(f\right)} = 
-    {1/4 \cdot 1/125 \over 1/4 \cdot 1/125 + 1 / 2 \cdot 1 / 300} = {6 \over 11}.
+    {1/2 \cdot 1/300 \over 1/2 \cdot 1/300 + 1 / 4 \cdot 1 / 125} = {5 \over 11}.
 $$
+
+\vskip 0.5in
+\noindent
+{\bf \bigger Chapter 2}
+\vskip 0.2in
+
+\noindent {\big Problem 1} \hfil \break
+The prior distribution is $\rm{Beta}\left(4 ,4\right) \propto \theta^3 \left(1 - \theta\right)^3$,
+while the probability of fewer than 3 heads conditional on $\theta$ is 
+$P\left(n < 3 | \theta\right) = P\left(0 | \theta\right) + P\left(1 | \theta\right) +
+P\left(2 | \theta\right) = {10 \choose 0} \left(1 - \theta\right)^{10} +
+{10 \choose 1} \theta \left(1 - \theta\right)^9 + {10 \choose 2} \theta^2 \left(1 - \theta\right)^8$.
+We therefore have $P\left(\theta | n < 3\right) \propto
+{10 \choose 0} \theta^3 \left(1 - \theta\right)^{13} +
+{10 \choose 1} \theta^4 \left(1 - \theta\right)^{12} + {10 \choose 2} \theta^5 \left(1 - \theta\right)^{11}$.
+Normalizing by requiring $\int_0^1\,d\theta P\left(\theta | n < 3\right) = 1$ gives
+$$
+ P\left(\theta | n < 3 \right) = {7735 \over 8} \theta^3 \left(1 - \theta\right)^11
+  \left(1 + 8 \theta + 36 \theta^2\right).
+$$
+The mode is 0.2812, the mean $39/128$, and the variance 0.0139.  The 95\% limits
+are 0.109 to 0.540.
+
+\vskip 0.2in
+\noindent {\big Problem 2} \hfil \break
+We have $P\left(H | C_1\right) = 0.6$ and $P\left(H | C_2\right) = 0.4$, so
+$$
+ P\left(C_1 | T, T\right) = {P\left(T, T | C_1\right) P\left(C_1\right) \over 
+  P\left(T, T | C_1\right) P\left(C_1\right) + P\left(T, T | C_2\right) P\left(C_2\right)}.
+$$
+Now $P\left(T,T | C_1\right) = 0.4^2$ and $P\left(T, T | C_2\right) = 0.6^2$,
+so assuming priors $P\left(C_1\right) = P\left(C_2\right) = 1/2$, we have
+$P\left(C_1 | T, T\right) = 0.3077$.
+
+The probability of making N spins until a head comes up is the probability of
+getting N-1 consecutive tails followed by one head, or $\theta \left(1 - \theta\right)^{N-1}$.
+Thus the expected number is therefore (with the aid of Mathematica)
+$$
+ E\left(N | \theta\right) = {\sum_{N=1}^\infty N \theta \left(1-\theta\right)^{N-1} \over
+  \sum_{N=1}^\infty \theta \left(1 - \theta\right)^{N-1}} = {1 \over \theta}.
+$$
+Therefore, the expectation is $0.3077 / 0.6 + \left(1-0.3077\right) / 0.4 = 2.2436$
+
+Alternatively, we could compute the probability distribution directly and do the sums on
+that using
+$$
+ P\left( \left(N-1\right) T, H | T, T \right) = 0.6 \left(1-0.6\right)^{N-1} \cdot 0.3077
+  0.4 \left(1 - 0.4\right)^{N-1} \cdot \left(1 - 0.3077\right),
+$$
+which gives the same answer.
 \end
