@@ -144,4 +144,21 @@ $$
   0.4 \left(1 - 0.4\right)^{N-1} \cdot \left(1 - 0.3077\right),
 $$
 which gives the same answer.
+
+\vskip 0.2in
+\noindent {\big Problem 14} \hfil \break
+a) It suffices to consider $\left(y - \theta\right)^2/\sigma^2 + \left(\theta - \mu_0\right)^2/\tau_0^2$.
+Expanding this, and discarding any terms that do not contain $\theta$, since they can be
+absorbed into the proportioinality, gives $\theta^2 \left(1/\sigma^2 + 1/\tau_0^2\right) -
+2 \theta \left(y / \sigma^2 + \mu_0 / \tau_0^2\right)$.  Now, complete the square
+using the standard $a x^2 + b x = a\left(x + d\right)^2 + e$ where $d = b/2a$ and
+$e = -b^2 / 4a$ with $a = \left(1 / \sigma^2 + 1 / \tau_0^2\right)$ and 
+$b = -2 \left(y / \sigma^2 + \mu_0 / \tau_0^2\right)$.  This $e$ doesn't depend on $\theta$,
+and can be discarded, leaving
+$$
+ p\left(\theta | y\right) \propto \exp \left(-{1 \over 2} \left({1 \over \sigma^2} + {1 \over \tau_0^2}
+ \right) \left(\theta - {y / \sigma^2 + \mu_0 / \tau_0^2 \over 1 / \sigma^2 + 1 / \tau_0^2}
+ \right)^2\right),
+$$
+which is formulae 2.9 and 2.10.
 \end
