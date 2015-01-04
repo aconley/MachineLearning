@@ -83,4 +83,63 @@ $
 Then substitute ${\partial f \over \partial \theta} = {\bf N}$.
 5.32 is basically the same thing.
 
+\vskip 0.4in
+\centerline{\big Chapter 7}
+\vskip 0.2in
+\noindent
+{\bf Section 7.3} The bias variance decomposition takes some work to show,
+but it's important.  The assumption is that $Y = f\left(x\right) + \epsilon$ with
+$E\left(\epsilon\right) = 0$, and our estimate of $f$ is $\hat f$.  Dropping
+the arguments from $f$ and ${\hat f}$ (so $f\left(x\right)$ is just $f$), at a point $x_0$,
+$$
+ \eqalign{
+   E\left[ \left(Y - {\hat f}\right)^2 \right] 
+    =& \, E\left[ \left(Y - f + f - {\hat f} \right)^2 \right] \cr
+    =& \, E\left[ \left(Y - f\right)^2 \right] + 
+            E\left[\left(f\ - {\hat f}\right)^2\right] +
+         2 E\left[\left(f - {\hat f}\right)\,\left(Y - f\right)\right] \cr
+    =& \, E\left[ \left(Y -f\right)^2 \right] + 
+            E\left[\left(f - {\hat f}\right)^2\right] +
+         2 \left( E\left[f {\hat f}\right] + E\left[Y f\right] 
+                   -E \left[Y {\hat f}\right] - E\left[f^2\right]\right).
+}
+$$
+Now, $Y - f = \epsilon$, so $E\left[\left(Y - f\right)^2\right] = E\left[\epsilon^2\right]$,
+and since $E\left[\epsilon\right] = 0$, this is just ${\rm Var}\left[\epsilon\right]$.
+Next, $E\left[y {\hat f}\right] = E\left[ f {\hat f}\right] + E\left[ \epsilon {\hat f}\right]$.
+${\hat f}$ is deterministic and independent of $\epsilon$, so $E\left[\epsilon {\hat f}\right] = 0$.
+Thus the first and third parts of the final term cancel.  Similarly, $E\left[ y f \right] = f^2$
+and $E\left[ f^2\right] = f^2$ so the second and fourth also cancel.  Therefore,
+$$
+ E\left[ \left(Y - {\hat f}\right)^2 \right] = {\rm Var}\left[\epsilon\right] + 
+ E\left[\left(f - {\hat f}\right)^2\right].
+ $$
+ 
+ Next, apply the same type of expansion to the final term but inserting $E\left[{\hat f}\right]$:
+ $$
+ \eqalign{
+   E\left[ \left(f - {\hat f}\right)^2 \right] 
+      =& \, E\left[ \left(f - E\left[{\hat f}\right] + E\left[{\hat f}\right] - {\hat f}\right)^2\right] \cr
+      =& \, E\left[ \left(f - E\left[{\hat f}\right]\right)^2\right] + 
+               E\left[\left(E\left[{\hat f}\right] - {\hat f}\right)^2\right]
+              + 2 E\left[ \left(E\left[{\hat f}\right] - {\hat f}\right)\,\left(f - E\left[{\hat f}\right]\right)\right] .
+ } 
+ $$
+
+As in the previous expansion, the final term turns out to cancel.  
+$E\left[f E\left[{\hat f}\right]\right] = f E\left[{\hat f}\right]$ since $f$ is deterministic.
+$E\left[ f {\hat f}\right] = f E\left[{\hat f}\right]$, so these terms cancel.
+$E\left[E\left[{\hat f}\right]^2\right] = E\left[{\hat f}\right]^2$, and
+$E\left[{\hat f} E\left[{\hat f}\right]\right] = E\left[{\hat f}\right]^2$, so those also cancel.
+
+So, if we identify $E\left[ \left(f - E\left[{\hat f}\right]\right)^2\right]$ as 
+${\rm Bias}^2\left[{\hat f}\right]$ and the second is
+$E\left[\left(E\left[{\hat f}\right] - {\hat f}\right)^2\right] = E\left[{\hat f}^2\right] - E\left[{\hat f}\right]^2$,
+which is ${\rm Var}\left[{\hat f}\right]$.  So, finally,
+$$
+E\left[ \left(Y - {\hat f}\right)^2 \right] = {\rm Var}\left[\epsilon\right]
+ + {\rm Bias}^2\left[{\hat f}\right] + {\rm Var}\left[{\hat f}\right],
+$$
+which is the bias-variance decomposition.
+
 \end
