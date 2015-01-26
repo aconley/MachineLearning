@@ -87,6 +87,13 @@ Then substitute ${\partial f \over \partial \theta} = {\bf N}$.
 \centerline{\big Chapter 7}
 \vskip 0.2in
 \noindent
+{\bf Section 7.1} This is perhaps an obvious point, but the reason we would
+prefer ${\rm Err}_{\cal T}$ to Err is that ultimately we always train with one
+training set, and we would like to know the err for the one we actually use
+than averaging over all possible training sets.
+
+\vskip 0.2in
+\noindent
 {\bf Section 7.3} The bias variance decomposition takes some work to show,
 but it's important.  The assumption is that $Y = f\left(x\right) + \epsilon$ with
 $E\left(\epsilon\right) = 0$, and our estimate of $f$ is $\hat f$.  Dropping
@@ -141,5 +148,12 @@ E\left[ \left(Y - {\hat f}\right)^2 \right] = {\rm Var}\left[\epsilon\right]
  + {\rm Bias}^2\left[{\hat f}\right] + {\rm Var}\left[{\hat f}\right],
 $$
 which is the bias-variance decomposition.
+
+\vskip 0.2in
+\noindent
+{\bf Section 7.10}
+Note that the notation in eq.~7.48 is a little silly, if technically correct.  Obviously one
+doesn't need to recompute the loss function $N$ times, but $K$ times.  It does show
+you what to do with unequal partitions, however.
 
 \end

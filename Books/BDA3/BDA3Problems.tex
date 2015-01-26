@@ -146,6 +146,58 @@ $$
 which gives the same answer.
 
 \vskip 0.2in
+\noindent {\big Problem 3} \hfil \break
+a) This is just a normal distribution with $\mu = 1000 / 6$ and $\sigma^2 = 5000 / 36$.\hfil\break
+b) It has approximate quantiles 147.3, 158.7, 166.7, 174.6, and 186.05 (5, 25, 50, 75, 95).
+  The exact (but discrete) quantiles are 147, 159, 167, 175, 186.
+  
+\vskip 0.2in
+\noindent {\big Problem 5} \hfil \break
+a) ${\rm Pr}\left(y = k | \theta\right) = {\rm Bin}\left(y | n, \theta\right)$.  This
+can be integrated:
+$$
+  {\rm Pr}\left(y = k\right) = \int_0^1 \, d\theta \, \theta^k \left(1 - \theta\right)^(n - k)
+    {n \choose k} = {1 \over n + 1}.
+$$
+b) The posterior density is 
+$$
+ p\left(\theta | y\right) = {\rm Beta}\left(\theta | \alpha + y, \beta + n - y\right)
+$$
+which, from the properties of a Beta distribution, has a mean
+$$
+  \alpha + y \over \beta + \alpha + n .
+$$
+The algebra is tedious, so I won't pursue this further.
+
+\vskip 0.2in
+\noindent {\big Problem 8} \hfil \break
+a) Directly from (2.11), $p\left(\theta | y\right) = N\left(\theta | \mu_n, \tau^2_n\right)$
+with
+$$
+ \mu_n = {{180 \over 40^2} + n {150 \over 20^2} \over {1 \over 40^2} + {n \over 20^2}}
+$$
+and
+$$
+ {1 \over \tau_n^2} = {1 \over 40^2} + {n \over 20^2}.
+$$
+b) This is simple for Normally distributed values -- the mean value is just $\mu_n$
+and the variance is $\tau^2_n + 20^2$ (recall, the variance is assumed known).\hfil\break
+c) $\mu_n = 150.7$ for $n=10$, and $\tau^2_n = 39.02$.  The 95\% interval
+  for $\theta$ is just $\mu_n \pm 1.96 \tau_n$, or about $\left[138.5, 162.9\right]$.
+ For $\tilde{y}$ the only thing that changes is the variance becomes $439.02$,
+  giving an interval of $\left[109.6, 191.8\right]$.\hfil\break
+d) I'll just give the updated means and variances: $\mu_n = 150.1$,
+ $\tau^2_n = 3.99$.
+ 
+\vskip 0.2in
+\noindent {\big Problem 9} \hfil\break
+a) The two equations to solve are ${\rm E} \left(\theta\right) = \alpha / \alpha + \beta = 0.6$
+and ${\rm Var} \left(\theta\right) = \alpha \beta / \left(\alpha + \beta\right)^2 \left(\alpha + \beta + 1\right)
+= 0.3^2$, which yields $\alpha = 1$, $\beta = 2/3$.\hfil\break
+b) $p\left( \theta | y \right) = {\rm Beta}\left(\theta | 651, 350\,2/3\right)$, which
+  is sharply peaked near 0.6499 with a variance of $2.25 \times 10^{-4}$.
+
+\vskip 0.2in
 \noindent {\big Problem 14} \hfil \break
 a) It suffices to consider $\left(y - \theta\right)^2/\sigma^2 + \left(\theta - \mu_0\right)^2/\tau_0^2$.
 Expanding this, and discarding any terms that do not contain $\theta$, since they can be
