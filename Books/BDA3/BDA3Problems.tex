@@ -198,6 +198,27 @@ b) $p\left( \theta | y \right) = {\rm Beta}\left(\theta | 651, 350\,2/3\right)$,
   is sharply peaked near 0.6499 with a variance of $2.25 \times 10^{-4}$.
 
 \vskip 0.2in
+\noindent {\big Problem 10} \hfil\break
+a) The probability of seeing car 203 is 0 if $N < 203$ and $1/N$ otherwise.  Therefore,
+the posterior probability is
+$$
+ p\left(N | 203\right) \propto \cases{0, & if $N < 203$;\cr
+   {1 \over 100} \left({99 \over 100}\right)^{N-1} {1 \over N} & otherwise\cr}.
+$$
+b) Numerically evaluating $p$ as well as it's normalization, 
+${\rm E}\left(N\right) = 279.1$ and ${\rm var}\left(N\right) = 6388$.\hfil\break
+c) The standard $1/N$ prior causes the sums to not converge.
+
+\vskip 0.2in
+\noindent {\big Problem 13}\hfil\break
+a) Using a 'vague' improper prior $p\left(\theta\right) \propto 1 / \theta$ (for $\theta > 0$),
+and $p\left(y | \theta\right) = \prod_{1976}^{1985} {1 \over n_f !} \theta^{n_f} e^{-\theta}
+= e^{-10\theta} \theta^{237}$.  Multiplying them gives a ${\rm Gamma}\left(238, 10\right)$
+distribution for $p\left(\theta | y\right)$.  So to generate a new draw by generating
+$\theta$ from that distribution, and then the predicted number is ${\rm Poisson}\left(\theta\right)$.
+A quick numerical calculation gives 14-34.
+
+\vskip 0.2in
 \noindent {\big Problem 14} \hfil \break
 a) It suffices to consider $\left(y - \theta\right)^2/\sigma^2 + \left(\theta - \mu_0\right)^2/\tau_0^2$.
 Expanding this, and discarding any terms that do not contain $\theta$, since they can be
@@ -212,5 +233,11 @@ $$
  \right) \left(\theta - {y / \sigma^2 + \mu_0 / \tau_0^2 \over 1 / \sigma^2 + 1 / \tau_0^2}
  \right)^2\right),
 $$
-which is formulae 2.9 and 2.10.
+which is formulae 2.9 and 2.10.\hfil\break
+b) To derive 2.12, just use the formula
+$$
+ \sum \left(y_i - \mu\right)^2 = \sum \left(y_i - \bar{y}\right)^2 + n \sum \left(\bar{y} - \mu\right)^2
+$$
+and, since the final term doesn't depend on $\mu$, this is the same as before but
+with $y \mapsto \bar{y}$ and $\sigma^2 \mapsto \sigma^2 / n$.
 \end
