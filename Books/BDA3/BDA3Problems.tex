@@ -240,4 +240,75 @@ $$
 $$
 and, since the final term doesn't depend on $\mu$, this is the same as before but
 with $y \mapsto \bar{y}$ and $\sigma^2 \mapsto \sigma^2 / n$.
+
+\vskip 0.5in
+\noindent
+{\bf \bigger Chapter 3}
+\vskip 0.2in
+
+\noindent {\big Problem 1} \hfil \break
+Denote the prior by ${\rm Dirchlet}\left(\beta_1, \ldots, \beta_J\right)$.
+Then the posterior pdf will be 
+$$
+ p\left(\theta_1, \ldots, \theta_J | y\right) =
+{\rm Dirchlet}\left(\beta_1 + y_1, \ldots, \beta_J + y_J\right)
+ \propto \theta_1^{\beta_1 + y_1 - 1} \ldots \theta_J^{\beta_J + y_J - 1}.
+$$
+We will need to find $p\left(\theta_1, \theta_2 | y\right)$ to do the transform.
+Examine what happens when one integral is done:
+$$
+\eqalign{
+  p\left(\theta_1, \ldots \theta_{J-1} | y\right) 
+    &= \int\, d\theta_J\,\, p\left(\theta_1, \ldots, \theta_J | y\right) \cr
+    &\propto \int \, d\theta_J\,\, \theta_1^{\beta_1 + y_1 - 1} \ldots 
+         \theta_J^{\beta_J + y_J - 1} \cr
+    &= \int_0^{1 - \theta_1 - \ldots - \theta_{J-1}}\, d\theta_J\,\,
+          \theta_1^{\beta_1 + y_1 - 1} \ldots \theta_J^{\beta_J + y_J - 1} \cr
+    &= {1 \over \beta_J + y_J} 
+        \left(1 - \theta_1 - \ldots \theta_{J-1}\right)^{\beta_J + y_J}
+        \theta_1^{\beta_1 + y_1 - 1} \ldots \theta_{J-1}^{\beta_{J-1} + y_{J-1} - 1}
+        . \cr}
+$$
+Do this $J-2$ times to get the marginal distribution.  Actually, even better,
+note that in Appendix~A, it flat out states that the marginal distribution
+of the subvector is 
+$$
+ p\left(\theta_1, \theta_2 | y\right) = {\rm Dirchlet}
+\left(\beta_1 + y_1, \beta_2 + y_2, \beta_3 + \ldots + \beta_J + y_3 + \ldots + y_J
+\right)
+$$ 
+where the last variable is $1 - \theta_1 - \theta_2$; that is:
+$$
+ p\left(\theta_1, \theta_2 | y\right) \propto \theta_1^{\beta_1 + y_1 - 1}
+   \theta_2^{\beta_2 + y_2 - 1} \left(1 - \theta_1 - \theta2\right)^{
+      \beta_3 + \ldots + \beta_J + y_3 + \ldots + y_J - 1}.
+$$
+Now do a change of variable.  We need to chose another one to pair with $\alpha =
+\theta_1 / \theta_1 + \theta_2$; $\gamma = \theta_1 + \theta_2$ is a reasonable choice
+giving $\theta_1 = \alpha \gamma$ and $\theta_2 = \gamma \left(1 - \alpha\right)$.
+The Jacobian is
+$$
+ J = \left| \matrix{{\partial \theta_1 \over \partial \alpha} &
+                    {\partial \theta_2 \over \partial \alpha} \cr
+                    {\partial \theta_1 \over \partial \gamma} &
+                    {\partial \theta_2 \over \partial \gamma}}\right| =
+     \left| \matrix{\gamma & -\gamma \cr \alpha & 1 - \alpha} \right| =
+      \gamma .
+$$
+Thus
+$$
+\eqalign{
+ p\left(\alpha, \gamma | y\right) &\propto \gamma 
+   \left(\alpha \gamma\right)^{\beta_1 + y_1- 1}
+   \left(\gamma \left(1 - \alpha\right)\right)^{\beta_2 + y_2 - 1}
+   \left(1 - \gamma\right)^{\beta_3 + \ldots + \beta_J + y_3 + \ldots + y_J - 1} \cr
+   &= \alpha^{\beta_1 + y_1 - 1} \left(1 - \alpha\right)^{\beta_2 + y_2 -1}
+     g\left(\gamma\right),\cr
+   }     
+$$
+where $g$ is some function of $\gamma$ but not $\alpha$.
+Since it factors into two independent pieces, we then have
+$p \left(\alpha | y\right) \propto \alpha^{\beta_1 + y_1 - 1}$
+which means that we must have $p \left(\alpha | y\right) = {\rm Beta}
+\left(\alpha | \beta_1 + y_1, \beta_2 + y_2\right)$.
 \end

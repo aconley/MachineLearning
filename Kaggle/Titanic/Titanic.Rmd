@@ -1,0 +1,50 @@
+---
+title: "Kaggle Titanic"
+output: html_document
+---
+
+This is the Kaggle Titanic competition, which is a learning example
+rather than a real competition.
+
+### Data Munging
+
+The major portion of the task here will be cleaning and imputing
+the input data.  So, start by reading in the training data:
+```{r}
+### Reads titanic data
+read.Titanic <- function(path.name, file.name) {
+    filename <- paste(path.name, file.name, sep="/")
+    col.types <- c('integer',   # PassengerId
+                    'factor',    # Survived 
+                    'factor',    # Pclass
+                    'character', # Name
+                    'factor',    # Sex
+                    'numeric',   # Age
+                    'integer',   # SibSp
+                    'integer',   # Parch
+                    'character', # Ticket
+                    'numeric',   # Fare
+                    'character', # Cabin
+                    'factor')     # Embarked
+    read.csv(filename, colClasses=col.types,
+             na.strings=c("NA", ""))
+}
+train.data <- read.Titanic('.', 'train.csv')
+```
+
+Now, there are some missing data that we need to impute.  A huge fraction
+of the cabin numbers are missing, which means it may be necessary to throw
+them out.  A good 20% of the ages are missing -- perhaps it is possible to
+impute those.  And a tiny number of embarked values are missing.  Since the
+majority of the passengers embarked at Southampton -- even those in first
+class, which the two missing values are from -- it's should be okay to 
+just assign those to the 'S' class.
+
+What about age?  It probably correlates with class:
+```{r}
+boxplot(train.data$Age ~ train.data$Pclass, main="Age vs. Passenger Class",
+        xlab="Passenger Class", ylab="Age [yrs]")
+```
+So that's probably useful.
+
+Another useful bit of information may come from the passenger names.
